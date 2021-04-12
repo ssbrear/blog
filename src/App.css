@@ -77,6 +77,7 @@ header > h1 {
   margin: 2em 10em;
   padding: 1em;
   background-color: #ddb492;
+  position: relative;
 }
 .post > img {
   display: block;
@@ -93,6 +94,27 @@ header > h1 {
   grid-area: p;
   font-size: 1.5rem;
   line-height: 1.5;
+}
+.x-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 25px;
+  height: 25px;
+}
+.x {
+  position: absolute;
+  right: 0;
+  top: 10px;
+  background-color: red;
+  width: 20px;
+  height: 2px;
+}
+.x-l {
+  transform: rotate(45deg);
+}
+.x-r {
+  transform: rotate(-45deg);
 }
 /* ========= */
 /* NEW POSTS */
@@ -121,8 +143,8 @@ input[type="file"] {
   grid-area: title;
 }
 #title-input {
-    font-size: 1.25rem;
-    text-align: center;
+  font-size: 1.25rem;
+  text-align: center;
 }
 #paragraph-label {
   grid-area: p;

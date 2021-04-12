@@ -21,6 +21,7 @@ const postData = [
 
 const app = express();
 app.use(express.json());
+app.use(express.text());
 
 // MIDDLEWARE FOR CORS ERROR
 app.use((req, res, next) => {
@@ -35,6 +36,12 @@ app.get("/api", (req, res) => {
 });
 app.post("/api", (req, res) => {
   postData.unshift(req.body);
+  res.send("Post complete");
+});
+app.delete("/api", (req, res) => {
+  const index = parseInt(req.body);
+  postData.splice(index, 1);
+  res.send("Delete complete");
 });
 
 app.listen(PORT, () => {
