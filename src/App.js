@@ -70,7 +70,7 @@ function App() {
           Stop Editing
         </button>
       </header>
-      <NewPost />
+      <NewPost editing={editing}/>
       <section>
         {postData.map((x, i) => (
           <Post key={i} data={x} />

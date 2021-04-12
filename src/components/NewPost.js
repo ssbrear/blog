@@ -1,8 +1,8 @@
 import React from "react";
 
-function NewPost({ data }) {
+function NewPost({ data, editing }) {
   return (
-    <article>
+    <article className={`${editing === true ? "show" : "hide"}`}>
       <form id="new-post-form">
         <label id="image-label" htmlFor="image-input">
           Upload an image
@@ -14,7 +14,7 @@ function NewPost({ data }) {
         </label>
         <label id="paragraph-label" htmlFor="paragraph-input">
           What would you like to post?
-        <textarea id="paragraph-input" />
+          <textarea id="paragraph-input" />
         </label>
         <button id="post-button" type="submit">
           Post
