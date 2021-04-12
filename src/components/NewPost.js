@@ -1,6 +1,19 @@
 import React from "react";
 
 function NewPost({ data, editing }) {
+  const postNew = (e) => {
+    const Image =
+      "https://upload.wikimedia.org/wikipedia/commons/4/45/A_small_cup_of_coffee.JPG";
+    const Title = document.getElementById("title-input").value;
+    const Paragraph = document.getElementById("paragraph-input").value;
+    fetch("http://localhost:3001/api", {
+      method: "POST",
+      body: JSON.stringify({ Title, Image, Paragraph }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => res.json().then((data) => console.log("Success: ", data)));
+  };
   return (
     <article className={`${editing === true ? "show" : "hide"}`}>
       <form id="new-post-form">
@@ -16,7 +29,7 @@ function NewPost({ data, editing }) {
           What would you like to post?
           <textarea id="paragraph-input" />
         </label>
-        <button id="post-button" type="submit">
+        <button onClick={postNew} id="post-button" type="submit">
           Post
         </button>
       </form>
