@@ -143,3 +143,21 @@ input[type="file"] {
   padding: 0.5em 1em;
   justify-self: center;
 }
+
+@media (max-width: 1000px) {
+  .post {
+    margin: 2em 2em;
+  }
+}
+@media (max-width: 750px) {
+  header h1 {
+    font-size: 2rem;
+  }
+  .post h2 {
+    font-size: 1rem;
+    justify-self: center;
+  }
+  .post p {
+    font-size: 0.875rem;
+  }
+}
