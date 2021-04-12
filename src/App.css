@@ -1,38 +1,89 @@
-.App {
+* {
+  margin: 0;
+  padding: 0;
+}
+.show {
+  display: block;
+}
+.hide {
+  display: none;
+}
+/* PAGE TITLE */
+header > h1 {
   text-align: center;
+  font-size: 3rem;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* EDITIING ACCESS / MODAL WINDOW */
+#edit-button,
+#stop-edit-button {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 8px;
+  font-size: 1.5rem;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+#modal {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1;
+  position: fixed;
+  display: none;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+#modal-window {
+  position: fixed;
+  top: calc(30% - 75px);
+  left: calc(50% - 100px);
+  background-color: white;
+  width: 200px;
+  height: 150px;
+  padding: 24px;
+  border-radius: 8px;
+  border: 1px solid black;
+}
+#modal-window h2 {
+  font-size: 2rem;
+  margin-bottom: 1em;
+}
+#modal-window form {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-flow: column nowrap;
+}
+#modal-window form label {
+  font-size: 1.5rem;
+}
+#modal-window form label input {
+  font-size: 1rem;
+}
+#modal-window form button {
+  margin-top: 1em;
+  align-self: center;
+}
+
+article {
+  display: grid;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  grid-template-areas: ". img title ." ". p p .";
+  grid-template-columns: 1fr 3fr 6fr 1fr;
+  row-gap: 1em;
+  border: 1px solid black;
+  margin: 2em 10em;
+  padding: 1em;
 }
-
-.App-link {
-  color: #61dafb;
+article > img {
+  display: block;
+  width: 100px;
+  height: 100px;
+  grid-area: img;
+  justify-self: center;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+article > h2 {
+  grid-area: title;
+  font-size: 2rem;
+}
+article > p {
+  grid-area: p;
+  font-size: 1.5rem;
+  line-height: 1.5;
 }
