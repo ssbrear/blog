@@ -8,12 +8,16 @@
 .hide {
   display: none;
 }
+/* ========== */
 /* PAGE TITLE */
+/* ========== */
 header > h1 {
   text-align: center;
   font-size: 3rem;
 }
+/* ============================== */
 /* EDITIING ACCESS / MODAL WINDOW */
+/* ============================== */
 #edit-button,
 #stop-edit-button {
   position: fixed;
@@ -59,8 +63,10 @@ header > h1 {
   margin-top: 1em;
   align-self: center;
 }
-
-article {
+/* ===== */
+/* POSTS */
+/* ===== */
+.post {
   display: grid;
   justify-content: center;
   align-items: center;
@@ -70,20 +76,70 @@ article {
   border: 1px solid black;
   margin: 2em 10em;
   padding: 1em;
+  background-color: #ddb492;
 }
-article > img {
+.post > img {
   display: block;
   width: 100px;
   height: 100px;
   grid-area: img;
   justify-self: center;
 }
-article > h2 {
+.post > h2 {
   grid-area: title;
   font-size: 2rem;
 }
-article > p {
+.post > p {
   grid-area: p;
   font-size: 1.5rem;
   line-height: 1.5;
+}
+/* ========= */
+/* NEW POSTS */
+/* ========= */
+#new-post-form {
+  display: grid;
+  grid-template-areas: ". img title ." ". p p ." ". b b .";
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  justify-content: center;
+  border: 1px solid black;
+  margin: 2em 10em;
+  padding: 1em;
+  background-color: #ddb492;
+  row-gap: 3em;
+}
+#image-label {
+  font-size: 1.25rem;
+  grid-area: img;
+}
+input[type="file"] {
+  padding: 4px;
+  margin: 4px;
+}
+#title-label {
+  font-size: 1.25rem;
+  grid-area: title;
+}
+#title-input {
+    font-size: 1.25rem;
+    text-align: center;
+}
+#paragraph-label {
+  grid-area: p;
+  font-size: 1.25rem;
+  align-self: center;
+  display: flex;
+  flex-flow: column nowrap;
+}
+#paragraph-input {
+  resize: vertical;
+  min-height: 10em;
+  padding: 8px;
+  font-size: 1.5rem;
+}
+#post-button {
+  grid-area: b;
+  font-size: 1.5rem;
+  padding: 0.5em 1em;
+  justify-self: center;
 }
