@@ -1,29 +1,26 @@
 const express = require("express");
+const { sequelize } = require("./models");
 
 const PORT = process.env.PORT || 3001;
 
-const postData = [
-  {
-    Title: "Kahuna Coffee Blend",
-    Image:
-      "https://upload.wikimedia.org/wikipedia/commons/4/45/A_small_cup_of_coffee.JPG",
-    Paragraph:
-      "With this seasonal flavored coffee there's no need to spend big bucks on a ticket to Hawaii, you can enjoy the taste of the tropics right from your kitchen. Put on a lei, find a beach chair, close you eyes and get swept away to coffee paradise with the blissful aroma of creamy white chocolate, perfectly toasted Hawaiian macadamia nuts and freshly ground coffee. Aloha",
-  },
-  {
-    Title: "Kahuna Coffee Blend",
-    Image:
-      "https://upload.wikimedia.org/wikipedia/commons/4/45/A_small_cup_of_coffee.JPG",
-    Paragraph:
-      "With this seasonal flavored coffee there's no need to spend big bucks on a ticket to Hawaii, you can enjoy the taste of the tropics right from your kitchen. Put on a lei, find a beach chair, close you eyes and get swept away to coffee paradise with the blissful aroma of creamy white chocolate, perfectly toasted Hawaiian macadamia nuts and freshly ground coffee. Aloha",
-  },
-];
-
+// ====================== CAN RESET DATABASE WITH A NEW PASSWORD ==================
+// ====================== WARNING: DELETES ALL POSTS ==============================
+const database = async () => {
+  await sequelize.sync();
+  // await sequelize.models.Post.create({
+  //   title: "Kahuna Coffee Blend",
+  //   image:
+  //     "https://upload.wikimedia.org/wikipedia/commons/4/45/A_small_cup_of_coffee.JPG",
+  //   paragraph:
+  //     "With this seasonal flavored coffee there's no need to spend big bucks on a ticket to Hawaii, you can enjoy the taste of the tropics right from your kitchen. Put on a lei, find a beach chair, close you eyes and get swept away to coffee paradise with the blissful aroma of creamy white chocolate, perfectly toasted Hawaiian macadamia nuts and freshly ground coffee. Aloha",
+  // });
+};
+database();
 const app = express();
 app.use(express.json());
 app.use(express.text());
 
-// MIDDLEWARE FOR CORS ERROR
+// MIDDLEWARE FOR CORS
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "http://localhost:3000");
   res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE");
@@ -31,16 +28,36 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/api", (req, res) => {
+app.get("/api", async (req, res) => {
+  const backendPosts = await sequelize.models.Post.findAll();
+  const postData = [];
+  backendPosts.forEach((x) => {
+    postData.push({
+      title: x.dataValues.title,
+      image: x.dataValues.image,
+      paragraph: x.dataValues.paragraph,
+      id: x.dataValues.id,
+    });
+  });
+  postData.reverse();
   res.json({ postData });
 });
-app.post("/api", (req, res) => {
-  postData.unshift(req.body);
-  res.send("Post complete");
+app.post("/api", async (req, res) => {
+  const { title, image, paragraph } = req.body;
+  console.log(req.body);
+  const newPost = await sequelize.models.Post.create({
+    title: title,
+    image: image,
+    paragraph: paragraph,
+  }).then(res.send("Post complete"));
 });
-app.delete("/api", (req, res) => {
-  const index = parseInt(req.body);
-  postData.splice(index, 1);
+app.delete("/api", async (req, res) => {
+  const id = parseInt(req.body);
+  await sequelize.models.Post.destroy({
+    where: {
+      id: id,
+    },
+  });
   res.send("Delete complete");
 });
 

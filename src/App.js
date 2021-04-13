@@ -35,12 +35,8 @@ function App() {
   });
 
   const deletePost = (e) => {
-    const confirmation = window.confirm(
-      "Are you sure you want to delete that post?"
-    );
-    const idToDelete = e.target.parentElement.id;
-    console.log(idToDelete);
-    if (confirmation) {
+    const idToDelete = e.currentTarget.parentElement.id;
+    if (idToDelete) {
       fetch("http://localhost:3001/api", {
         method: "DELETE",
         body: idToDelete,
@@ -85,13 +81,7 @@ function App() {
       <NewPost editing={editing} />
       <section>
         {postData.map((x, i) => (
-          <Post
-            editing={editing}
-            deletePost={deletePost}
-            index={i}
-            key={i}
-            data={x}
-          />
+          <Post editing={editing} deletePost={deletePost} key={i} data={x} />
         ))}
       </section>
     </main>

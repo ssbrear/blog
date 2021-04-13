@@ -2,13 +2,13 @@ import React from "react";
 
 function NewPost({ data, editing }) {
   const postNew = (e) => {
-    const Image =
+    const image =
       "https://upload.wikimedia.org/wikipedia/commons/4/45/A_small_cup_of_coffee.JPG";
-    const Title = document.getElementById("title-input").value;
-    const Paragraph = document.getElementById("paragraph-input").value;
+    const title = document.getElementById("title-input").value;
+    const paragraph = document.getElementById("paragraph-input").value;
     fetch("http://localhost:3001/api", {
       method: "POST",
-      body: JSON.stringify({ Title, Image, Paragraph }),
+      body: JSON.stringify({ title, image, paragraph }),
       headers: {
         "Content-Type": "application/json",
       },
