@@ -8,12 +8,16 @@ function App() {
   const [postData, setCurrentData] = useState([]);
   const login = (e) => {
     e.preventDefault();
-    const password = document.getElementById("password").value;
-    if (password === "1") {
-      document.getElementById("modal").style.display = "none";
-      document.getElementById("password").value = "";
-      setEdit(true);
-    }
+    const enteredPassword = document.getElementById("password").value;
+    fetch("http://localhost:3001/api/pw").then((res) => {
+      res.text().then((textRes) => {
+        if (enteredPassword === textRes) {
+          document.getElementById("modal").style.display = "none";
+          document.getElementById("password").value = "";
+          setEdit(true);
+        }
+      });
+    });
   };
 
   useEffect(() => {

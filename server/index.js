@@ -42,6 +42,14 @@ app.get("/api", async (req, res) => {
   postData.reverse();
   res.json({ postData });
 });
+app.get("/api/pw", async (req, res) => {
+  const users = await sequelize.models.User.findAll();
+  let backendPw;
+  users.forEach((x) => {
+    backendPw = x.dataValues.password;
+  });
+  res.send(backendPw);
+});
 app.post("/api", async (req, res) => {
   const { title, image, paragraph } = req.body;
   console.log(req.body);
