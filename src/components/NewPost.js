@@ -6,7 +6,7 @@ function NewPost({ data, editing }) {
       "https://upload.wikimedia.org/wikipedia/commons/4/45/A_small_cup_of_coffee.JPG";
     const title = document.getElementById("title-input").value;
     const paragraph = document.getElementById("paragraph-input").value;
-    fetch("http://localhost:3001/api", {
+    fetch("/api", {
       method: "POST",
       body: JSON.stringify({ title, image, paragraph }),
       headers: {

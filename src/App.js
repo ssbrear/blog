@@ -9,7 +9,7 @@ function App() {
   const login = (e) => {
     e.preventDefault();
     const enteredPassword = document.getElementById("password").value;
-    fetch("http://localhost:3001/api/pw").then((res) => {
+    fetch("/api/pw").then((res) => {
       res.text().then((textRes) => {
         if (enteredPassword === textRes) {
           document.getElementById("modal").style.display = "none";
@@ -30,10 +30,9 @@ function App() {
         setEdit(false);
       }
     });
-    fetch("http://localhost:3001/api").then((res) => {
+    fetch("/api").then((res) => {
       res.json().then((jsonRes) => {
-        if (postData.length !== jsonRes.postData.length)
-          setCurrentData(jsonRes.postData);
+        if (postData.length !== jsonRes.length) setCurrentData(jsonRes);
       });
     });
   });
@@ -41,7 +40,7 @@ function App() {
   const deletePost = (e) => {
     const idToDelete = e.currentTarget.parentElement.id;
     if (idToDelete) {
-      fetch("http://localhost:3001/api", {
+      fetch("/api", {
         method: "DELETE",
         body: idToDelete,
         headers: {
