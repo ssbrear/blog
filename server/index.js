@@ -70,9 +70,6 @@ app.delete("/api", async (req, res) => {
   });
   res.send("Delete complete");
 });
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../build", "index.html"));
-});
 
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);

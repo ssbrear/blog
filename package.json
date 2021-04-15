@@ -17,8 +17,16 @@
     "web-vitals": "^1.1.1"
   },
   "scripts": {
-    "start": "node server/index.js",
-    "server": "nodemon server/index.js"
+    "start": "node server/index.js && npm run start-react",
+    "server": "nodemon server/index.js",
+
+    "start-react": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+
+    
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false && cd server && npm install && cd ../client && npm install   && npm run build"
   },
   "eslintConfig": {
     "extends": [
