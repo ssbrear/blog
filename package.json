@@ -16,6 +16,7 @@
     "sequelize": "^6.6.2",
     "web-vitals": "^1.1.1"
   },
+  "proxy": "http://localhost:3001",
   "scripts": {
     "start": "node server/index.js && npm run start-react",
     "server": "nodemon server/index.js",

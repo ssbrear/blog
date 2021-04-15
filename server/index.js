@@ -31,6 +31,7 @@ app.use((req, res, next) => {
 app.use(express.static(path.join(__dirname, "../build")));
 
 app.get("/api", async (req, res) => {
+  console.log("ping");
   const backendPosts = await sequelize.models.Post.findAll();
   const postData = [];
   backendPosts.forEach((x) => {
